@@ -4,6 +4,7 @@ import dev.luanpoi.omnisacbackend.dtos.ClientDto;
 import dev.luanpoi.omnisacbackend.dtos.ClientRegisterFormDto;
 import dev.luanpoi.omnisacbackend.dtos.UserDto;
 import dev.luanpoi.omnisacbackend.dtos.ViaCEPReturnVo;
+import dev.luanpoi.omnisacbackend.services.ClientService;
 import dev.luanpoi.omnisacbackend.services.PostalCodeService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,13 @@ public class ClientResource {
     private ModelMapper modelMapper;
     @Autowired
     private PostalCodeService postalCodeService;
+    @Autowired
+    private ClientService clientService;
 
     @PostMapping(value = "/register", produces = "application/json")
-    public ResponseEntity<ClientDto> findById(@RequestBody ClientRegisterFormDto registerForm) {
-        return ResponseEntity.status(HttpStatus.OK).body(new ClientDto(UUID.randomUUID(), new UserDto(UUID.randomUUID(), null, registerForm.getFirstName(), registerForm.getLastName(), registerForm.getEmail(), true), null, null, null, null, new ArrayList<>()));
+    public ResponseEntity<ClientDto> register(@RequestBody ClientRegisterFormDto registerForm) {
+        ClientDto client = this.clientService.register(registerForm);
+        return ResponseEntity.status(HttpStatus.OK).body(client);
     }
 
     @GetMapping(value = "/validatePostalCode/{postalcode}")
