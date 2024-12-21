@@ -1,0 +1,28 @@
+networks:
+  omnisac_network:
+    name: omnisac_network
+
+services:
+  omnisac-database:
+    init: true
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+    container_name: omnisac_database
+    ports:
+      - "5432:5432"
+    networks:
+      omnisac_network: {}
+
+  omnisac-backend:
+    init: true
+    build:
+      context: ./back/omnisacbackend
+      dockerfile: Dockerfile
+    container_name: omnisac_backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      omnisac-database:
+    networks:
+      omnisac_network: {}

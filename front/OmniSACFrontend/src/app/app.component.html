@@ -1,0 +1,60 @@
+<main>
+  <h1>{{'register.client' | translate}}</h1>
+  <form [formGroup]="_form">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Primeiro nome</mat-label>
+      <input matInput formControlName="firstName" name="firstName" type="text" matInput>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Último nome</mat-label>
+      <input matInput formControlName="lastName" name="lastName" type="text" matInput>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>E-mail</mat-label>
+      <input matInput formControlName="email" name="email" type="text" matInput>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Senha</mat-label>
+      <input matInput formControlName="password" name="password" type="text" matInput>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Confirmar senha</mat-label>
+      <input matInput formControlName="confirmPassword" name="confirmPassword" type="text" matInput>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>CEP</mat-label>
+      <input matInput formControlName="postalCode" name="postalCode" type="text" matInput (blur)="validatePostalCode()">
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Rua</mat-label>
+      <input matInput formControlName="street" name="street" type="text" matInput>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Número</mat-label>
+      <input matInput formControlName="number" name="number" type="text" matInput>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Complemento</mat-label>
+      <input matInput formControlName="complement" name="complement" type="text" matInput>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Bairro</mat-label>
+      <input matInput formControlName="neighborhood" name="neighborhood" type="text" matInput>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Cidade</mat-label>
+      <input matInput formControlName="city" name="city" type="text" matInput>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Estado</mat-label>
+      <input matInput formControlName="state" name="state" type="text" matInput>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>País</mat-label>
+      <input matInput formControlName="country" name="country" type="text" matInput>
+    </mat-form-field>
+  </form>
+  <div class="control-buttons">
+    <button mat-flat-button (click)="onConfirmClicked()">Cadastrar</button>
+  </div>
+</main>

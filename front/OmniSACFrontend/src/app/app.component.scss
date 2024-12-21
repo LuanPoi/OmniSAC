@@ -1,0 +1,17 @@
+main {
+    max-width: 33%;
+    min-width: 500px;
+    margin: auto;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.control-buttons {
+    > button {
+        display: block;
+        margin-left: auto;
+    }
+}

@@ -1,0 +1,2 @@
+INSERT INTO public.countries (id, name, iso_code, country_code, language, identification_document_name, created_by, created_date, last_modified_by, last_modified_date) VALUES
+    (uuid_generate_v4(), 'Brasil', 'BR', '55', 'pt-BR', 'CPF', 'system', current_timestamp, 'system', current_timestamp);

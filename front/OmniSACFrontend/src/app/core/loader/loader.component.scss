@@ -1,0 +1,14 @@
+.cssload-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color:  var(--clr-neutral-92);
+    z-index: 9999;
+    opacity: 0.7;
+  }
