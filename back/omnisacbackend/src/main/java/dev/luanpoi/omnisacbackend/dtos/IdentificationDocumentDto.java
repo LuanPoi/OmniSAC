@@ -1,12 +1,16 @@
 package dev.luanpoi.omnisacbackend.dtos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import dev.luanpoi.omnisacbackend.models.Client;
 import dev.luanpoi.omnisacbackend.models.Country;
 
 import java.util.UUID;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class IdentificationDocumentDto {
     private UUID id;
+    @JsonIgnore()
     private ClientDto client;
     private CountryDto country;
     private String documentNumber;

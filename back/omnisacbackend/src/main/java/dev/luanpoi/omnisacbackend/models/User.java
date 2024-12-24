@@ -41,4 +41,91 @@ public class User extends Auditable<String> implements Serializable {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<PhoneNumber> phoneNumbers;
+
+    public User() {
+    }
+
+    public User(UUID id, PhoneNumber defaultPhoneNumber, String firstName, String lastName, String email, String password, String salt, boolean isActive, List<PhoneNumber> phoneNumbers) {
+        this.id = id;
+        this.defaultPhoneNumber = defaultPhoneNumber;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.salt = salt;
+        this.isActive = isActive;
+        this.phoneNumbers = phoneNumbers;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public PhoneNumber getDefaultPhoneNumber() {
+        return defaultPhoneNumber;
+    }
+
+    public void setDefaultPhoneNumber(PhoneNumber defaultPhoneNumber) {
+        this.defaultPhoneNumber = defaultPhoneNumber;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public List<PhoneNumber> getPhoneNumbers() {
+        return phoneNumbers;
+    }
+
+    public void setPhoneNumbers(List<PhoneNumber> phoneNumbers) {
+        this.phoneNumbers = phoneNumbers;
+    }
 }

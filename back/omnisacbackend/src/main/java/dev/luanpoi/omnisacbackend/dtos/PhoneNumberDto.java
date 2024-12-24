@@ -1,12 +1,16 @@
 package dev.luanpoi.omnisacbackend.dtos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import dev.luanpoi.omnisacbackend.models.Country;
 import dev.luanpoi.omnisacbackend.models.User;
 
 import java.util.UUID;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PhoneNumberDto {
     private UUID id;
+    @JsonIgnore()
     private User user;
     private CountryDto country;
     private String areaCode;

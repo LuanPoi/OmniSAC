@@ -1,9 +1,11 @@
 package dev.luanpoi.omnisacbackend.dtos;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import dev.luanpoi.omnisacbackend.models.PhoneNumber;
 
 import java.util.UUID;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDto {
     private UUID id;
     private PhoneNumberDto defaultPhoneNumber;

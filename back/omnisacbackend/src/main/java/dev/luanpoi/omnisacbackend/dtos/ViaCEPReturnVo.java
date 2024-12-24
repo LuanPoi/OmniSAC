@@ -1,5 +1,8 @@
 package dev.luanpoi.omnisacbackend.dtos;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ViaCEPReturnVo {
 
     private String cep;

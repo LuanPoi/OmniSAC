@@ -1,5 +1,6 @@
 package dev.luanpoi.omnisacbackend.dtos;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import dev.luanpoi.omnisacbackend.models.Address;
 import dev.luanpoi.omnisacbackend.models.IdentificationDocument;
 import dev.luanpoi.omnisacbackend.models.User;
@@ -7,19 +8,20 @@ import dev.luanpoi.omnisacbackend.models.User;
 import java.util.List;
 import java.util.UUID;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ClientDto {
     private UUID id;
     private UserDto user;
     private IdentificationDocumentDto identificationDocument;
-    private Address defaultAddress;
-    private Address billingAddress;
+    private AddressDto defaultAddress;
+    private AddressDto billingAddress;
     private List<IdentificationDocumentDto> identificationDocuments;
-    private List<Address> addresses;
+    private List<AddressDto> addresses;
 
     public ClientDto() {
     }
 
-    public ClientDto(UUID id, UserDto user, IdentificationDocumentDto identificationDocument, Address defaultAddress, Address billingAddress, List<IdentificationDocumentDto> identificationDocuments, List<Address> addresses) {
+    public ClientDto(UUID id, UserDto user, IdentificationDocumentDto identificationDocument, AddressDto defaultAddress, AddressDto billingAddress, List<IdentificationDocumentDto> identificationDocuments, List<AddressDto> addresses) {
         this.id = id;
         this.user = user;
         this.identificationDocument = identificationDocument;
@@ -53,19 +55,19 @@ public class ClientDto {
         this.identificationDocument = identificationDocument;
     }
 
-    public Address getDefaultAddress() {
+    public AddressDto getDefaultAddress() {
         return defaultAddress;
     }
 
-    public void setDefaultAddress(Address defaultAddress) {
+    public void setDefaultAddress(AddressDto defaultAddress) {
         this.defaultAddress = defaultAddress;
     }
 
-    public Address getBillingAddress() {
+    public AddressDto getBillingAddress() {
         return billingAddress;
     }
 
-    public void setBillingAddress(Address billingAddress) {
+    public void setBillingAddress(AddressDto billingAddress) {
         this.billingAddress = billingAddress;
     }
 
@@ -77,11 +79,11 @@ public class ClientDto {
         this.identificationDocuments = identificationDocuments;
     }
 
-    public List<Address> getAddresses() {
+    public List<AddressDto> getAddresses() {
         return addresses;
     }
 
-    public void setAddresses(List<Address> addresses) {
+    public void setAddresses(List<AddressDto> addresses) {
         this.addresses = addresses;
     }
 }

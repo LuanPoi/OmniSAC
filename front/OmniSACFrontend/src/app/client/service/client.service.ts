@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpOmniSACService } from "../../core/services/http.web.service";
-import { ClientRegisterForm } from "../model/clientRegisterForm.model";
+import { ClientRegisterForm } from "../models/clientRegisterForm.model";
 import { Observable } from "rxjs";
-import { AddressValidationReturn } from "../model/addressValidationReturn";
+import { AddressValidationReturn } from "../models/addressValidationReturn";
 
 @Injectable({
     providedIn: 'root'
@@ -20,7 +20,7 @@ export class ClientService {
         );
     }
 
-    validatePostalCode(postalCode: string): Observable<AddressValidationReturn> {
-        return this.httpOmniSACService.get(`${this.endpoint}/validatePostalCode/${postalCode}`);
+    validatePostalCode(countryId: string, postalCode: string): Observable<AddressValidationReturn> {
+        return this.httpOmniSACService.get(`${this.endpoint}/validatePostalCode/${countryId}/${postalCode}`);
     }
 }

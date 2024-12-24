@@ -39,4 +39,73 @@ public class Client extends Auditable<String> implements Serializable {
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Address> addresses;
+
+    public Client() {
+    }
+
+    public Client(UUID id, User user, IdentificationDocument identificationDocument, Address defaultAddress, Address billingAddress, List<IdentificationDocument> identificationDocuments, List<Address> addresses) {
+        this.id = id;
+        this.user = user;
+        this.identificationDocument = identificationDocument;
+        this.defaultAddress = defaultAddress;
+        this.billingAddress = billingAddress;
+        this.identificationDocuments = identificationDocuments;
+        this.addresses = addresses;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public IdentificationDocument getIdentificationDocument() {
+        return identificationDocument;
+    }
+
+    public void setIdentificationDocument(IdentificationDocument identificationDocument) {
+        this.identificationDocument = identificationDocument;
+    }
+
+    public Address getDefaultAddress() {
+        return defaultAddress;
+    }
+
+    public void setDefaultAddress(Address defaultAddress) {
+        this.defaultAddress = defaultAddress;
+    }
+
+    public Address getBillingAddress() {
+        return billingAddress;
+    }
+
+    public void setBillingAddress(Address billingAddress) {
+        this.billingAddress = billingAddress;
+    }
+
+    public List<IdentificationDocument> getIdentificationDocuments() {
+        return identificationDocuments;
+    }
+
+    public void setIdentificationDocuments(List<IdentificationDocument> identificationDocuments) {
+        this.identificationDocuments = identificationDocuments;
+    }
+
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+    }
 }

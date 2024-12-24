@@ -7,4 +7,6 @@ COPY pg_hba.conf /etc/postgresql/postgresql.conf.d
 
 EXPOSE 5432
 
+VOLUME [ "/var/lib/postgresql/data" ]
+
 CMD ["postgres"]

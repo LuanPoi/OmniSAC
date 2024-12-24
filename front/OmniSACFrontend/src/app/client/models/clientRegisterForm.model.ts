@@ -11,10 +11,10 @@ export class ClientRegisterForm {
   neighborhood?: string;
   city?: string;
   state?: string;
-  country?: string;
+  countryId?: string;
 
   constructor({
-    firstName, lastName, email, password, confirmPassword, postalCode, street, number, complement, neighborhood, city, state, country }: {
+    firstName, lastName, email, password, confirmPassword, postalCode, street, number, complement, neighborhood, city, state, countryId }: {
     firstName?: string;
     lastName?: string;
     email?: string;
@@ -27,7 +27,7 @@ export class ClientRegisterForm {
     neighborhood?: string;
     city?: string;
     state?: string;
-    country?: string;
+    countryId?: string;
   } = {}) {
     this.firstName = firstName;
     this.lastName = lastName;
@@ -41,6 +41,6 @@ export class ClientRegisterForm {
     this.neighborhood = neighborhood;
     this.city = city;
     this.state = state;
-    this.country = country;
+    this.countryId = countryId;
   }
 }

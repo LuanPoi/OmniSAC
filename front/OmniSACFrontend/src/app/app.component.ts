@@ -5,12 +5,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { TranslateService } from '@ngx-translate/core';
 import {TranslateModule} from "@ngx-translate/core";
-import { ClientRegisterForm } from './client/model/clientRegisterForm.model';
+import { ClientRegisterForm } from './client/models/clientRegisterForm.model';
 import { ClientService } from './client/service/client.service';
+import { BehaviorSubject } from 'rxjs';
+import { Country } from './country/models/country';
+import { CountryService } from './country/services/country.service';
+import { MatSelectModule } from '@angular/material/select'
 
 @Component({
   selector: 'app-root',
-  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, TranslateModule],
+  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, TranslateModule, MatSelectModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -22,7 +26,8 @@ export class AppComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private translate: TranslateService,
-    private clientService: ClientService
+    private clientService: ClientService,
+    private countryService: CountryService
   ) {
     this.translate.addLangs(['pt']);
     this.translate.setDefaultLang('pt');
@@ -46,6 +51,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.countryService.getCountries().subscribe((countries) => this._form.get('country')?.setValue(countries[0].id));
   }
 
   passwordMatchValidator(form: FormGroup) {
@@ -66,7 +72,7 @@ export class AppComponent implements OnInit {
       neighborhood: this._form.get('neighborhood')?.value,
       city: this._form.get('city')?.value,
       state: this._form.get('state')?.value,
-      country: this._form.get('country')?.value
+      countryId: this._form.get('country')?.value
     });
 
     this.clientService.registerUser(clientRegisterForm).subscribe((result) => {
@@ -75,7 +81,7 @@ export class AppComponent implements OnInit {
   }
 
   validatePostalCode(): void {
-    this.clientService.validatePostalCode(this._form.get('postalCode')?.value).subscribe((validation) => {
+    this.clientService.validatePostalCode(this._form.get('country')?.value, this._form.get('postalCode')?.value).subscribe((validation) => {
       if (validation == null) return;
       this._form.get('postalCode')?.setValue(validation.cep);
       this._form.get('postalCode')?.disable();
@@ -92,7 +98,7 @@ export class AppComponent implements OnInit {
       this._form.get('state')?.setValue(validation.estado);
       this._form.get('state')?.disable();
       
-      this._form.get('country')?.setValue("Brasil");
+      this._form.get('country')?.setValue("0164872e-0671-4720-93a3-4840507b0b11");
       this._form.get('country')?.disable();
       
     });

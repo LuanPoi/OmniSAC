@@ -24,4 +24,46 @@ public class IdentificationDocument extends Auditable<String> implements Seriali
 
     @Column(name = "document_number", nullable = false)
     private String documentNumber;
+
+    public IdentificationDocument() {
+    }
+
+    public IdentificationDocument(UUID id, Client client, Country country, String documentNumber) {
+        this.id = id;
+        this.client = client;
+        this.country = country;
+        this.documentNumber = documentNumber;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
+    public String getDocumentNumber() {
+        return documentNumber;
+    }
+
+    public void setDocumentNumber(String documentNumber) {
+        this.documentNumber = documentNumber;
+    }
 }

@@ -1,52 +1,31 @@
-package dev.luanpoi.omnisacbackend.models;
+package dev.luanpoi.omnisacbackend.dtos;
 
-import dev.luanpoi.omnisacbackend.audit.Auditable;
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import dev.luanpoi.omnisacbackend.models.Client;
+import dev.luanpoi.omnisacbackend.models.Country;
 
-import java.io.Serializable;
 import java.util.UUID;
 
-@Entity
-@Table(name = "addresses", schema = "public")
-public class Address extends Auditable<String> implements Serializable {
-    @Id
-    @GeneratedValue
-    @Column(name = "id", updatable = false, unique = true, nullable = false)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class AddressDto {
     private UUID id;
 
-    @ManyToOne
-    @JoinColumn(name = "client_id", nullable = false)
-    private Client client;
-
-    @ManyToOne
-    @JoinColumn(name = "country_id", nullable = false)
-    private Country country;
-
-    @Column(name = "postal_code", nullable = false)
+    @JsonIgnore()
+    private ClientDto client;
+    private CountryDto country;
     private String postalCode;
-
-    @Column(name = "street", nullable = false)
     private String street;
-
-    @Column(name = "number", nullable = true, length = 10)
     private String number;
-
-    @Column(name = "complement", nullable = true)
     private String complement;
-
-    @Column(name = "neighborhood", nullable = true)
     private String neighborhood;
-
-    @Column(name = "city", nullable = false)
     private String city;
-
-    @Column(name = "state", nullable = false)
     private String state;
 
-    public Address() {
+    public AddressDto() {
     }
 
-    public Address(UUID id, Client client, Country country, String postalCode, String street, String number, String complement, String neighborhood, String city, String state) {
+    public AddressDto(UUID id, ClientDto client, CountryDto country, String postalCode, String street, String number, String complement, String neighborhood, String city, String state) {
         this.id = id;
         this.client = client;
         this.country = country;
@@ -67,19 +46,19 @@ public class Address extends Auditable<String> implements Serializable {
         this.id = id;
     }
 
-    public Client getClient() {
+    public ClientDto getClient() {
         return client;
     }
 
-    public void setClient(Client client) {
+    public void setClient(ClientDto client) {
         this.client = client;
     }
 
-    public Country getCountry() {
+    public CountryDto getCountry() {
         return country;
     }
 
-    public void setCountry(Country country) {
+    public void setCountry(CountryDto country) {
         this.country = country;
     }
 

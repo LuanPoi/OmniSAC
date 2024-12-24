@@ -1,6 +1,11 @@
 package dev.luanpoi.omnisacbackend.dtos;
 
-public class ClientRegisterFormDto {
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import java.util.UUID;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class ClientRegistrationDto {
     private String firstName;
     private String lastName;
     private String email;
@@ -13,12 +18,12 @@ public class ClientRegisterFormDto {
     private String neighborhood;
     private String city;
     private String state;
-    private String country;
+    private UUID countryId;
 
-    public ClientRegisterFormDto() {
+    public ClientRegistrationDto() {
     }
 
-    public ClientRegisterFormDto(String firstName, String lastName, String email, String password, String confirmPassword, String postalCode, String street, String number, String complement, String neighborhood, String city, String state, String country) {
+    public ClientRegistrationDto(String firstName, String lastName, String email, String password, String confirmPassword, String postalCode, String street, String number, String complement, String neighborhood, String city, String state, UUID countryId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -31,7 +36,7 @@ public class ClientRegisterFormDto {
         this.neighborhood = neighborhood;
         this.city = city;
         this.state = state;
-        this.country = country;
+        this.countryId = countryId;
     }
 
     public String getFirstName() {
@@ -130,11 +135,11 @@ public class ClientRegisterFormDto {
         this.state = state;
     }
 
-    public String getCountry() {
-        return country;
+    public UUID getCountryId() {
+        return countryId;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setCountryId(UUID countryId) {
+        this.countryId = countryId;
     }
 }
