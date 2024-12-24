@@ -3,17 +3,17 @@ package dev.luanpoi.omnisacbackend.dtos;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class UserRegistrationDto {
+public class UserRegistrationFormDto {
     private String firstName;
     private String lastName;
     private String email;
     private String password;
     private String confirmPassword;
 
-    public UserRegistrationDto() {
+    public UserRegistrationFormDto() {
     }
 
-    public UserRegistrationDto(String firstName, String lastName, String email, String password, String confirmPassword) {
+    public UserRegistrationFormDto(String firstName, String lastName, String email, String password, String confirmPassword) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

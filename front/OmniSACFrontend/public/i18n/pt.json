@@ -1,5 +1,36 @@
 {
-    "register": {
-        "client": "Cadastro de cliente"
+    "TOAST": {
+        "ERROR": {
+            "DEFAULT": "Um erro desconhecido ocorreu ao tentar executar a última ação.",
+            "401": "Acesso negado.",
+            "403": "Ação não autorizada.",
+            "500": "Uma falha ocorreu no servidor."
+        }
+    },
+    "PAGES": {
+        "CLIENT_REGISTRATION": {
+            "LABEL": "Cadastro de cliente",
+            "USER_SECTION_LABEL": "Dados de usuário",
+            "ADDRESS_SECTION_LABEL": "Endereço",
+            "FIRST_NAME": "Primeiro nome",
+            "LAST_NAME": "Último nome",
+            "EMAIL": "E-mail",
+            "PASSWORD": "Senha",
+            "CONFIRM_PASSWORD": "Confirmar senha",
+            "COUNTRY": "País",
+            "POSTAL_CODE": "Código Postal",
+            "STATE": "Estado",
+            "CITY": "Cidade",
+            "NEIGHBORHOOD": "Bairro",
+            "STREET": "Rua",
+            "NUMBER": "Número",
+            "COMPLEMENT": "Complemento",
+            "REGISTER": "Cadastrar"
+        }
+    },
+    "ERROR": {
+        "CONNECTION": {
+            "POSTAL_CODE_SERVICE": "Falha no servidor ao tentar validar código postal."
+        }
     }
 }

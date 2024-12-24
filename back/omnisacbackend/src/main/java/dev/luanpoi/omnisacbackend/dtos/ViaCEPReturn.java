@@ -3,7 +3,7 @@ package dev.luanpoi.omnisacbackend.dtos;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ViaCEPReturnVo {
+public class ViaCEPReturn {
 
     private String cep;
     private String logradouro;
@@ -19,10 +19,10 @@ public class ViaCEPReturnVo {
     private String ddd;
     private String siafi;
 
-    public ViaCEPReturnVo() {
+    public ViaCEPReturn() {
     }
 
-    public ViaCEPReturnVo(String cep, String logradouro, String complemento, String unidade, String bairro, String localidade, String uf, String estado, String regiao, String ibge, String gia, String ddd, String siafi) {
+    public ViaCEPReturn(String cep, String logradouro, String complemento, String unidade, String bairro, String localidade, String uf, String estado, String regiao, String ibge, String gia, String ddd, String siafi) {
         this.cep = cep;
         this.logradouro = logradouro;
         this.complemento = complemento;

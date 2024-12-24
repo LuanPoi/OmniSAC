@@ -8,6 +8,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { provideToastr } from 'ngx-toastr';
+import { provideEnvironmentNgxMask } from 'ngx-mask';
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
   http: HttpClient
@@ -20,6 +21,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideHttpClient(),
     provideToastr(),
+    provideEnvironmentNgxMask(),
     importProvidersFrom([TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

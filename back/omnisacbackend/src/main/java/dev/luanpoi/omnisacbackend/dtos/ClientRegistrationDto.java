@@ -2,7 +2,10 @@ package dev.luanpoi.omnisacbackend.dtos;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import java.util.ArrayList;
+import java.util.Objects;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ClientRegistrationDto {
@@ -141,5 +144,18 @@ public class ClientRegistrationDto {
 
     public void setCountryId(UUID countryId) {
         this.countryId = countryId;
+    }
+
+    public ArrayList<String> validate(){
+        ArrayList<String> errors = new ArrayList<String>();
+        if(!Objects.equals(this.password, this.confirmPassword)) errors.add("ERROR.CONFIRM_PASSWORD.DONT_MATCH");
+        if(this.firstName.isEmpty()) errors.add("ERROR.FIRST_NAME.IS_EMPTY");
+        if(this.lastName.isEmpty()) errors.add("ERROR.LAST_NAME.IS_EMPTY");
+        if(this.email.isEmpty()) errors.add("ERROR.EMAIL.IS_EMPTY");
+        if(!Pattern.compile("^(.+)@(\\S+)$").matcher(this.email).matches()) errors.add("ERROR.EMAIL.INVALID");
+        String cleanedPostalCode = postalCode.trim().replaceAll("\\D", "");
+        if(cleanedPostalCode.isEmpty()) errors.add("ERROR.POSTAL_CODE.IS_EMPTY");
+        if(cleanedPostalCode.length() != 8) errors.add("ERROR.POSTAL_CODE.IS_INVALID"); // specific for CEP
+        return errors;
     }
 }

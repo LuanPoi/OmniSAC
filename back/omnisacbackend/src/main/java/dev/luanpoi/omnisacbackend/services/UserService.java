@@ -1,6 +1,6 @@
 package dev.luanpoi.omnisacbackend.services;
 
-import dev.luanpoi.omnisacbackend.dtos.UserRegistrationDto;
+import dev.luanpoi.omnisacbackend.dtos.UserRegistrationFormDto;
 import dev.luanpoi.omnisacbackend.models.User;
 import dev.luanpoi.omnisacbackend.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +14,16 @@ import java.util.UUID;
 public class UserService {
     @Autowired
     UserRepository userRepository;
-    public User register(UserRegistrationDto userRegistrationDto) {
+    @Autowired
+    AuthService authService;
+
+    public User register(UserRegistrationFormDto userRegistrationDto) {
         if(!Objects.equals(userRegistrationDto.getPassword(), userRegistrationDto.getConfirmPassword())) return null;
-        //Add salt and encode it
+
+        String salt = UUID.randomUUID().toString().substring(0, 5);
+        String encodedPassword = this.authService.encodePassword(userRegistrationDto.getPassword(), salt);
+        userRegistrationDto.setPassword(encodedPassword);
+
         return this.create(
             new User(
                 null,
@@ -25,7 +32,7 @@ public class UserService {
                 userRegistrationDto.getLastName(),
                 userRegistrationDto.getEmail(),
                 userRegistrationDto.getPassword(),
-                UUID.randomUUID().toString().substring(0, 5),
+                salt,
                 true,
                 new ArrayList<>()
             )

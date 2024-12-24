@@ -1,3 +1,5 @@
-<div *ngIf="this.loadingState" class="cssload-container">
-    <mat-spinner [diameter]="75" [strokeWidth]="7"></mat-spinner>
-</div>
+@if (this.loadingState) {
+    <div class="cssload-container">
+        <mat-spinner [diameter]="75" [strokeWidth]="7"></mat-spinner>
+    </div>
+}

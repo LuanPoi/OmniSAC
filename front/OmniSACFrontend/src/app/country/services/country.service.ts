@@ -7,7 +7,7 @@ import { Country } from "../models/country";
     providedIn: 'root'
 })
 export class CountryService {
-    endpoint: string = "country";
+    endpoint: string = "countries";
 
     constructor(private httpOmniSACService: HttpOmniSACService) {
     }

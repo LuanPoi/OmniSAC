@@ -1,17 +1,30 @@
 main {
-    max-width: 33%;
-    min-width: 500px;
+    width: fit-content;
     margin: auto;
-}
 
-form {
-    display: flex;
-    flex-direction: column;
-}
+    h1 {
+        text-align: center;
+    }
 
-.control-buttons {
-    > button {
-        display: block;
-        margin-left: auto;
+    form {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    
+        .form-section {
+            display: flex;
+            flex-direction: column;
+            max-width: 33%;
+            min-width: 500px;
+        }
+    }
+
+    .control-buttons {
+        > button {
+            display: block;
+            margin-left: auto;
+        }
     }
 }
