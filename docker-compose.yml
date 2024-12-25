@@ -1,6 +1,7 @@
 networks:
-  omnisac_network:
-    name: omnisac_network
+  omnisac-network:
+    name: omnisac-network
+    driver: bridge
 
 services:
   omnisac-database:
@@ -8,21 +9,45 @@ services:
     build:
       context: ./database
       dockerfile: Dockerfile
-    container_name: omnisac_database
+    container_name: omnisac-database
     ports:
       - "5432:5432"
     networks:
-      omnisac_network: {}
+      - omnisac-network
 
   omnisac-backend:
     init: true
     build:
       context: ./back/omnisacbackend
       dockerfile: Dockerfile
-    container_name: omnisac_backend
+    container_name: omnisac-backend
     ports:
       - "8080:8080"
     depends_on:
-      omnisac-database:
+      - omnisac-database
     networks:
-      omnisac_network: {}
+      - omnisac-network
+
+  omnisac-frontend:
+    init: true
+    build:
+      context: ./front/OmniSACFrontend
+      dockerfile: Dockerfile
+    container_name: omnisac-frontend
+    ports:
+      - "80:80"
+    networks:
+      - omnisac-network
+
+  flyway:
+    image: flyway/flyway:9.2.1-alpine
+    environment:
+      - FLYWAY_EDITION=community
+    command: migrate
+    volumes:
+      - ./database/migrations:/flyway/sql/
+      - ./database/flyway.conf:/flyway/conf/flyway.conf
+    networks:
+      - omnisac-network
+    depends_on:
+      - omnisac-database

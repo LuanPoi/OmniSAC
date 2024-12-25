@@ -1,0 +1,21 @@
+buildscript {
+    dependencies {
+        classpath 'org.postgresql:postgresql:42.5.0'
+    }
+}
+
+plugins {
+    id "org.flywaydb.flyway" version "9.2.1"
+    id 'application'
+}
+
+
+flyway {
+    outOfOrder = false
+    locations = ["filesystem:migrations"]
+    url = "jdbc:postgresql://127.0.0.1:5432/omnisac"
+    user = 'omnisac'
+    password = '!omnisac'
+}
+//https://flywaydb.org/documentation/usage/gradle/
+//https://flywaydb.org/documentation/database/postgresql

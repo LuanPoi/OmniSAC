@@ -169,9 +169,6 @@ export class AppComponent implements OnInit, AfterViewInit {
         this._form.get('state')?.setValue(response.data?.estado);
         this._form.get('state')?.disable();
   
-        this._form.get('country')?.setValue("0164872e-0671-4720-93a3-4840507b0b11");
-        this._form.get('country')?.disable();
-  
         this.loaderService.hideLoader();
       },
       error: (e: any) => {
