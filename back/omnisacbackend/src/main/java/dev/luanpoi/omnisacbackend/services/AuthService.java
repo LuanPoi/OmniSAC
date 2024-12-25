@@ -1,5 +1,6 @@
 package dev.luanpoi.omnisacbackend.services;
 
+import dev.luanpoi.omnisacbackend.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,10 @@ public class AuthService {
     }
 
     public String encodePassword(String password, String salt){
-        return passwordEncoder.encode(password.concat(salt));
+        return passwordEncoder.encode(password+salt);
+    }
+
+    public Boolean validatePassword(User user, String password) {
+        return passwordEncoder.matches(password+user.getSalt(), user.getPassword());
     }
 }

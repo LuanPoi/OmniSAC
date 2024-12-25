@@ -1,13 +1,8 @@
 package dev.luanpoi.omnisacbackend.resources;
 
-import dev.luanpoi.omnisacbackend.dtos.ClientDto;
-import dev.luanpoi.omnisacbackend.dtos.ClientRegistrationDto;
-import dev.luanpoi.omnisacbackend.dtos.ResponseDto;
-import dev.luanpoi.omnisacbackend.dtos.ViaCEPReturn;
+import dev.luanpoi.omnisacbackend.dtos.*;
 import dev.luanpoi.omnisacbackend.models.Client;
-import dev.luanpoi.omnisacbackend.services.AddressService;
 import dev.luanpoi.omnisacbackend.services.ClientService;
-import dev.luanpoi.omnisacbackend.services.PostalCodeService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -54,6 +50,4 @@ public class ClientResource {
                     .body(new ResponseDto<ClientDto, String>(null, false, Arrays.asList(e.getMessage())));
         }
     }
-
-
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -19,6 +19,7 @@ import { AddressService } from './address/services/address.service';
 import { Response } from './core/models/response';
 import { AddressValidationReturn } from './client/models/addressValidationReturn';
 import { Client } from './client/models/client';
+import { UserService } from './user/services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +27,7 @@ import { Client } from './client/models/client';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   title = 'OmniSACFrontend';
 
   _isLoading: boolean = true;
@@ -35,10 +36,13 @@ export class AppComponent implements OnInit {
 
   _form: FormGroup;
 
+  _loginForm: FormGroup;
+
   _postalCodeName: string | null = null;
 
   constructor(
     private fb: FormBuilder,
+    private userService: UserService,
     private clientService: ClientService,
     private countryService: CountryService,
     private addressService: AddressService,
@@ -65,11 +69,15 @@ export class AppComponent implements OnInit {
       state: ['', [Validators.required, Validators.maxLength(255)]],
       country: ['', [Validators.required, Validators.maxLength(255)]]
     }, { validator: this.passwordMatchValidator });
+
+    this._loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]]
+    });
   }
 
   ngOnInit(): void {
     this._isLoading = true;
-    this.loaderService.showLoader();
     this.countryService.getCountries().subscribe({
       next: (countries) => {
         this._countries = countries;
@@ -81,9 +89,14 @@ export class AppComponent implements OnInit {
       },
       error: (error) => {
         this.toastService.warning("Não foi possível carregar os dados de país, por favor verifique sua conexão com a internet e tente novamente.");
+        this._isLoading = false;
         this.loaderService.hideLoader();
       }
     });
+  }
+
+  ngAfterViewInit(): void {
+    this.loaderService.showLoader();
   }
 
   passwordMatchValidator(form: FormGroup) {
@@ -172,6 +185,26 @@ export class AppComponent implements OnInit {
           this.loaderService.hideLoader();
           return;
         }
+      }
+    });
+  }
+
+  onTestLoginClicked() {
+    this.loaderService.showLoader();
+    this.userService.login(this._loginForm.get('email')?.value, this._loginForm.get('password')?.value).subscribe({
+      next: (response) => {
+        if (response.success) {
+          this.toastService.success(response.data);
+        }
+        this.loaderService.hideLoader();
+      },
+      error: (response: {error: Response<string, string>}) => {
+        if (response.error.error) {
+          response.error.errors?.forEach(error => {
+            this.toastService.error(error);
+          });
+        }
+        this.loaderService.hideLoader();
       }
     });
   }

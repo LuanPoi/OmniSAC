@@ -1,6 +1,7 @@
 package dev.luanpoi.omnisacbackend.services;
 
 import dev.luanpoi.omnisacbackend.dtos.UserRegistrationFormDto;
+import dev.luanpoi.omnisacbackend.models.Client;
 import dev.luanpoi.omnisacbackend.models.User;
 import dev.luanpoi.omnisacbackend.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -41,5 +43,13 @@ public class UserService {
 
     public User create(User user) {
         return this.userRepository.save(user);
+    }
+
+    public Optional<User> findByEmail(String email) {
+        return this.userRepository.findByEmail(email);
+    }
+
+    public boolean checkIfCredentialsAreValid(User user, String password) {
+        return authService.validatePassword(user, password);
     }
 }

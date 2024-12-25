@@ -76,3 +76,22 @@
     </form>
   }
 </main>
+<div class="login-container">
+  <form [formGroup]="_loginForm">
+    <mat-divider></mat-divider>
+    <h3>Teste de usuário</h3>
+    <div class="login-section">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>{{'PAGES.CLIENT_REGISTRATION.EMAIL' | translate}}</mat-label>
+        <input matInput formControlName="email" name="email" type="email" matInput>
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>{{'PAGES.CLIENT_REGISTRATION.PASSWORD' | translate}}</mat-label>
+        <input matInput formControlName="password" name="password" type="password" matInput>
+      </mat-form-field>
+      <div class="control-buttons">
+        <button [disabled]="_loginForm.invalid" mat-flat-button (click)="onTestLoginClicked()"><mat-label>Testar usuário</mat-label></button>
+      </div>
+    </div>
+  </form>
+</div>

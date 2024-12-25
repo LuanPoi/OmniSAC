@@ -28,3 +28,20 @@ main {
         }
     }
 }
+
+.login-container {
+    margin-top: 2rem;
+
+    h3 {
+        text-align: center;
+    }
+
+    .login-section {
+        display: flex;
+        flex-direction: row;
+        max-width: 33%;
+        min-width: 500px;
+        gap: 1rem;
+        margin: auto;
+    }
+}
