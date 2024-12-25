@@ -2,6 +2,7 @@ package dev.luanpoi.omnisacbackend;
 
 import dev.luanpoi.omnisacbackend.models.User;
 import dev.luanpoi.omnisacbackend.services.AuthService;
+import dev.luanpoi.omnisacbackend.services.impl.AuthServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,7 +18,7 @@ public class TestAuthService {
 
     @BeforeEach
     void setUp() {
-        authService = new AuthService();
+        authService = new AuthServiceImpl();
         passwordEncoder = new BCryptPasswordEncoder();
     }
 
