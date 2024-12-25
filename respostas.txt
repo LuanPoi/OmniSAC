@@ -1,0 +1,16 @@
+1. A solução deve ser disponibilizada em Cloud ou On-premise?
+R: A solução pode ser disponibilizada no formata On-premise, porém devido a necessidade de escalabilidade é recomendado o uso de algum provedor de nuvem devido ao fácil escalonamento e desescalonamento dos serviços on-demand;
+
+2. Considerando a participação de 4 pessoas técnicas para o desenvolvimento dessa
+solução, responda qual ferramenta acreditas ser apropriada para o controle de tarefas
+da equipe, a ferramenta é ágil?
+R: Diversas ferramentas atendem a esta necessidade com facilidade então primeiramente seria interessante utilizar a ferramenta que o time ja estivesse acostumado devido a praticidade, caso nenhuma se encaixa neste contexto então recomendaria o github projects ou gitlab issues ou equivalente, uma ferramenta embutina no proprio sistema de versionamento para que as informações fiquem centralizadas em apenas um lugar.
+
+3. Você se sente capaz de liderar esta equipe? Por quê?
+R: Sim, acredito que seria capaz de liderar uma equipe em tal projeto, porém procuraria entender a especialidade de cada membro da equipe e me apoiaria em opiniões deles ou de outros colaboradores com mais experiência em certas areas que sinto estar ainda aquém do ideal, como na area de segurança por exemplo.
+
+4. Se pudesse sugerir uma melhoria, mudança ou oportunidade. O que seria?
+R: Acredito que o passo seguinte mais importante seria a integração deste sistema com todo o ecossistema de vendas da bemol, para que clientes possam iniciar um atendimento já informando a compra em questão e agilizando o processo para o colaborador tratando deste atendimento. Também seria possível fazer integrações com o whatsapp e outras redes sociais para fornecer mais meios de contato integrados para os clientes.
+
+5. Acha válido esse desafio para o processo que está participando?
+R: Sim, apesar de o processo específico que estou participando ser mais para a atuação no frontend, como esta é uma vaga para engenheiro de software é importante que todos os engenheiro conheçam ao menos um pouco sobre como criar cada parte de uma aplicação pois este conhecimento fornece novas visões sobre como abordar um certo problema. Como diz o ditado popular "Para quem só conhece martelo, todo parafuso é prego".
