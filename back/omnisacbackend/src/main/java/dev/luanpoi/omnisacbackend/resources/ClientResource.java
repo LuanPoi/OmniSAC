@@ -3,6 +3,8 @@ package dev.luanpoi.omnisacbackend.resources;
 import dev.luanpoi.omnisacbackend.dtos.*;
 import dev.luanpoi.omnisacbackend.models.Client;
 import dev.luanpoi.omnisacbackend.services.ClientService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/v1/clients")
 public class ClientResource {
+    private static final Logger LOGGER = LogManager.getLogger();
     @Autowired
     private ClientService clientService;
 
@@ -45,6 +48,7 @@ public class ClientResource {
                             new ArrayList<>()
                     ));
         } catch (Exception e) {
+            LOGGER.error("(ClientResource) /register"+" -> exception: "+e);
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ResponseDto<ClientDto, String>(null, false, Arrays.asList(e.getMessage())));

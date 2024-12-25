@@ -6,6 +6,8 @@ import dev.luanpoi.omnisacbackend.dtos.ResponseDto;
 import dev.luanpoi.omnisacbackend.models.Client;
 import dev.luanpoi.omnisacbackend.models.User;
 import dev.luanpoi.omnisacbackend.services.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/v1/users")
 public class UserResource {
+    private static final Logger LOGGER = LogManager.getLogger();
     @Autowired
     UserService userService;
 

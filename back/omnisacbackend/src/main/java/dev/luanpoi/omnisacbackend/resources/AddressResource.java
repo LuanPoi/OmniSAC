@@ -4,6 +4,8 @@ import dev.luanpoi.omnisacbackend.dtos.ClientDto;
 import dev.luanpoi.omnisacbackend.dtos.ResponseDto;
 import dev.luanpoi.omnisacbackend.dtos.ViaCEPReturn;
 import dev.luanpoi.omnisacbackend.services.PostalCodeService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import java.util.Arrays;
 @RestController
 @RequestMapping("/v1/addresses")
 public class AddressResource {
+    private static final Logger LOGGER = LogManager.getLogger();
     @Autowired
     private PostalCodeService postalCodeService;
 
@@ -29,6 +32,7 @@ public class AddressResource {
             ViaCEPReturn result = postalCodeService.validatePostalCode(postalCode);
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseDto<ViaCEPReturn, String>(result, true, new ArrayList<>()));
         } catch (Exception e) {
+            LOGGER.error("(AddressResource) /validatePostalCode/"+countryId+"/"+postalCode+" -> exception: " + e);
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ResponseDto<ViaCEPReturn, String>(null, false, Arrays.asList(e.getMessage())));

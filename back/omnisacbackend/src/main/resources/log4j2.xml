@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xmlns="https://logging.apache.org/xml/ns"
+               xsi:schemaLocation="https://logging.apache.org/xml/ns https://logging.apache.org/xml/ns/log4j-config-2.xsd">
+
+    <Appenders>
+        <Console name="CONSOLE">
+            <JsonTemplateLayout/>
+        </Console>
+        <RollingFile name="FILE"
+                     fileName="/var/log/app.%d{yyyy-MM-dd}.log"
+                     filePattern="/var/log/app.log.%i.gz">
+            <JsonTemplateLayout/>
+            <DefaultRolloverStrategy max="15"/>
+            <Policies>
+                <CronTriggeringPolicy schedule="0 0 0 * * ?"/>
+                <SizeBasedTriggeringPolicy size="100k"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="dev.luanpoi" level="INFO"/>
+        <Root level="WARN">
+            <AppenderRef ref="CONSOLE"/>
+        </Root>
+    </Loggers>
+
+</Configuration>
