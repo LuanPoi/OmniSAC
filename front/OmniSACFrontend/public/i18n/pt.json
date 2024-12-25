@@ -4,7 +4,8 @@
             "DEFAULT": "Um erro desconhecido ocorreu ao tentar executar a última ação.",
             "401": "Acesso negado.",
             "403": "Ação não autorizada.",
-            "500": "Uma falha ocorreu no servidor."
+            "500": "Uma falha ocorreu no servidor.",
+            "500.undefined": "Uma falha desconhecida ocorreu no servidor."
         }
     },
     "PAGES": {

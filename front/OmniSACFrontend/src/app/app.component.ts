@@ -15,6 +15,10 @@ import { Country } from './country/models/country';
 import { NgxMaskDirective } from 'ngx-mask';
 import { LoaderService } from './core/loader/loader.service';
 import { LoaderComponent } from './core/loader/loader.component';
+import { AddressService } from './address/services/address.service';
+import { Response } from './core/models/response';
+import { AddressValidationReturn } from './client/models/addressValidationReturn';
+import { Client } from './client/models/client';
 
 @Component({
   selector: 'app-root',
@@ -37,6 +41,7 @@ export class AppComponent implements OnInit {
     private fb: FormBuilder,
     private clientService: ClientService,
     private countryService: CountryService,
+    private addressService: AddressService,
     private toastService: ToastrService,
     private loaderService: LoaderService,
     private translateService: TranslateService
@@ -105,20 +110,19 @@ export class AppComponent implements OnInit {
 
     this.clientService.registerUser(clientRegisterForm).subscribe({
       next: (response) => {
+        if (response.success) this.toastService.success(`Usuário criado com sucesso! (Id: "${response.data?.id}")`);
+        this.loaderService.hideLoader();
+      },
+      error: (e: any) => {
+        let response: Response<Client, string> = e.error;
         if (response.error) {
           response.errors?.forEach(error => {
             this.translateService.get(error).subscribe(translatedError => {
               this.toastService.error(translatedError);
             });
           });
+          this.loaderService.hideLoader();
         }
-        if (response.success) this.toastService.success(`Usuário criado com sucesso! (Id: "${response.data?.id}")`);
-        this.loaderService.hideLoader();
-      },
-      error: (error) => {
-        this.translateService.get(error).subscribe(translatedError => {
-          this.toastService.error(translatedError);
-        });
       }
     });
   }
@@ -131,40 +135,44 @@ export class AppComponent implements OnInit {
       return;
     }
     this.loaderService.showLoader();
-    this.clientService.validatePostalCode(this._form.get('country')?.value, postalCode).subscribe((response) => {
-      if (response == null) {
+    this.addressService.validatePostalCode(this._form.get('country')?.value, postalCode).subscribe({
+      next: (response) => {
+        if (response == null) {
+          this.loaderService.hideLoader();
+          return;
+        }
+  
+        this._form.get('postalCode')?.setValue(response.data?.cep);
+  
+        this._form.get('street')?.setValue(response.data?.logradouro);
+        this._form.get('street')?.disable();
+  
+        this._form.get('neighborhood')?.setValue(response.data?.bairro);
+        this._form.get('neighborhood')?.disable();
+  
+        this._form.get('city')?.setValue(response.data?.localidade);
+        this._form.get('city')?.disable();
+  
+        this._form.get('state')?.setValue(response.data?.estado);
+        this._form.get('state')?.disable();
+  
+        this._form.get('country')?.setValue("0164872e-0671-4720-93a3-4840507b0b11");
+        this._form.get('country')?.disable();
+  
         this.loaderService.hideLoader();
-        return;
-      }
-
-      if (response.error) {
-        response.errors?.forEach(error => {
-          this.translateService.get(error).subscribe(translatedError => {
-            this.toastService.error(translatedError);
+      },
+      error: (e: any) => {
+        let response: Response<AddressValidationReturn, string> = e.error;
+        if (response.error) {
+          response.errors?.forEach(error => {
+            this.translateService.get(error).subscribe(translatedError => {
+              this.toastService.error(translatedError);
+            });
           });
-        });
-        this.loaderService.hideLoader();
-        return;
+          this.loaderService.hideLoader();
+          return;
+        }
       }
-
-      this._form.get('postalCode')?.setValue(response.data?.cep);
-
-      this._form.get('street')?.setValue(response.data?.logradouro);
-      this._form.get('street')?.disable();
-
-      this._form.get('neighborhood')?.setValue(response.data?.bairro);
-      this._form.get('neighborhood')?.disable();
-
-      this._form.get('city')?.setValue(response.data?.localidade);
-      this._form.get('city')?.disable();
-
-      this._form.get('state')?.setValue(response.data?.estado);
-      this._form.get('state')?.disable();
-
-      this._form.get('country')?.setValue("0164872e-0671-4720-93a3-4840507b0b11");
-      this._form.get('country')?.disable();
-
-      this.loaderService.hideLoader();
     });
   }
 }

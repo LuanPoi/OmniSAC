@@ -21,8 +21,4 @@ export class ClientService {
             clientRegisterForm
         );
     }
-
-    validatePostalCode(countryId: string, postalCode: string): Observable<Response<AddressValidationReturn, string>> {
-        return this.httpOmniSACService.get(`${this.endpoint}/validatePostalCode/${countryId}/${postalCode}`);
-    }
 }
